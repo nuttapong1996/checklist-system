@@ -30,7 +30,11 @@
 
 <!-- ####################### Side bar ############################-->
    <nav id="mySidebar" class="sidebar">
+       
         <a href="#" style="pointer-events: none; cursor:default;">  <h3><?php echo $_SESSION['username']; ?> </h3></a>
+        <a href="#">Menu 1</a>
+        <a href="#">Menu 1</a>
+        <a href="#">Menu 1</a>
         <a href="#">Menu 1</a>
         <a href="login/logout.php" class="btn-logout">ออกจากระบบ</a>
     </nav>
