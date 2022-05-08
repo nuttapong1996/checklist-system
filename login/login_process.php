@@ -12,6 +12,8 @@
         while($row = $result->fetch_assoc()){
             $_SESSION['username'] = $row['username'];
             $_SESSION['user_code'] = $row['user_code'];
+            $_SESSION['f_name'] = $row['fname'];
+            $_SESSION['l_name'] = $row['lname'];
             $_SESSION['password'] = md5(md5(md5($row['password']))); 
             
             if(isset($_POST['remember'])){

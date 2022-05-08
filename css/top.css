@@ -1,0 +1,111 @@
+                /* Top Navbar */
+                
+                #home_d {
+                    color: orange;
+                    font-weight: bolder;
+                }
+                
+                #navbarDropdown {
+                    color: white;
+                }
+                
+                .user_detail_desktop {
+                    right: 10px;
+                    position: fixed;
+                    background-color: orange;
+                }
+                
+                .user_detail_desktop a {
+                    color: #000!important;
+                    font-weight: bolder;
+                }
+                /* The sidebar menu */
+                
+                .sidebar {
+                    height: 100%;
+                    /* 100% Full-height */
+                    width: 0;
+                    /* 0 width - change this with JavaScript */
+                    position: fixed;
+                    /* Stay in place */
+                    z-index: 1;
+                    /* Stay on top */
+                    top: 0;
+                    left: 0;
+                    background-color: #111;
+                    /* Black*/
+                    overflow-x: hidden;
+                    /* Disable horizontal scroll */
+                    padding-top: 60px;
+                    /* Place content 60px from the top */
+                    transition: 0.5s;
+                    /* 0.5 second transition effect to slide in the sidebar */
+                }
+                /* The sidebar links */
+                
+                .sidebar a {
+                    padding: 6px 8px 6px 16px;
+                    text-decoration: none;
+                    font-size: 18px;
+                    display: block;
+                    transition: 0.3s;
+                }
+                /* When you mouse over the navigation links, change their color */
+                
+                .sidebar a:hover {
+                    color: orange;
+                }
+                
+                #home_a {
+                    color: white!important;
+                }
+                
+                #logout {
+                    color: white!important;
+                    background-color: red!important;
+                }
+                
+                #user_detail {
+                    color: black!important;
+                    background-color: orange!important;
+                }
+                
+                .dropdown-btn {
+                    padding: 6px 8px 6px 16px;
+                    text-decoration: none;
+                    font-size: 20px;
+                    color: #FFFF;
+                    display: block;
+                    border: none;
+                    background: none;
+                    width: 100%;
+                    text-align: left;
+                    cursor: pointer;
+                    outline: none;
+                }
+                
+                .dropdown-container a {
+                    color: #000;
+                }
+                
+                .dropdown-container {
+                    display: none;
+                    background-color: #EAEDED;
+                    padding-left: 10px;
+                }
+                /* Optional: Style the caret down icon */
+                
+                .fa-caret-down {
+                    float: right;
+                    padding-right: 8px;
+                }
+                /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+                
+                @media screen and (max-height: 450px) {
+                    .sidebar {
+                        padding-top: 15px;
+                    }
+                    .sidebar a {
+                        font-size: 18px;
+                    }
+                }

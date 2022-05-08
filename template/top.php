@@ -7,60 +7,126 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- เรียกใช้รูปแบบ CSS Sidebar -->
-    <link rel="stylesheet" href="css/sidebar.css">
-<!--เรียกใช้งาน Library จากไฟล์ header.php -->
-    <?php include 'include/header.php'; ?>
+    <link rel="stylesheet" href="css/top.css">
 </head>
 <body>
+<!-- Nav bar Desktop -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"> <img src="img/logo/icon.png" width="30" height="27"> <label for="">ระบบ Checklist</label></a>
+        <button class="navbar-toggler" id="closeBtn" type="button" data-bs-toggle="collapse" onclick="openNav()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<!-- ########################## Main Navbar  ###################-->
-    <nav class="navbar navbar-dark bg-dark" id="main-nav"> 
-        <div class="contain-fluid">            
-            <button class="navbar-toggler ms-3" id="collapse" type="button" style="background-color: orange;" onclick="openNav()" >
-                <?php  ?>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home_d" aria-current="page" href="#">หน้าหลัก</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">แบบฟอร์ม Checklist</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Wifi</a></li>
+                        <li><a class="dropdown-item" href="#">Printer RICOH</a></li>
+                        <li><a class="dropdown-item" href="#">Printer Sticker</a></li>
+                        <li><a class="dropdown-item" href="#">CCTV</a></li>
+                        <li><a class="dropdown-item" href="#">Wall Rack</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ออกรายงาน</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Wifi</a></li>
+                        <li><a class="dropdown-item" href="#">Printer RICOH</a></li>
+                        <li><a class="dropdown-item" href="#">Printer Sticker</a></li>
+                        <li><a class="dropdown-item" href="#">CCTV</a></li>
+                        <li><a class="dropdown-item" href="#">Wall Rack</a></li>
+                    </ul>
+                </li>
+                <div class="user_detail_desktop">
+                    <li class="nav-item dropdown" id="user_detail_desktop">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            สวัสดี คุณ <?php echo$_SESSION['f_name'] , "  ", $_SESSION['l_name']; ?>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">แก้ไขข้อมูลส่วนตัว</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login/logout.php" id="logout">ออกจากระบบ</a></li>
+                        </ul>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+    </nav>
+<!-- End Nav bar Desktop -->
+
+<!-- Side Navbar for Mobile -->
+    <div id="Sidebar" class="sidebar">
+            <button class="dropdown-btn" id="user_detail"> 
+                <h6 >สวัสดี ,</h6> <h5> คุณ<?php echo $_SESSION['f_name'] ,"  ",$_SESSION['l_name'] ?> <i class="fa fa-caret-down"></i></h5>                
             </button>
-            <img class="navbar-brand-centered" src="img/logo/icon.png" >              
-        </div>           
-    </nav>
-<!-- #############################################################-->
+            <div class="dropdown-container">
+                <a href="#">แก้ไขข้อมูลส่วนตัว</a>
+            </div>           
+            <a href="#" id="home_a">หน้าหลัก</a>
+            <button class="dropdown-btn">
+                แบบฟอร์ม Checklist
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="#">Wifi</a>
+                <a href="#">Printer RICOH</a>
+                <a href="">Printer Sticker</a>
+                <a href="#">CCTV</a>
+                <a href="">Wall Rack</a>
+            </div>
+            <button class="dropdown-btn">
+                ออกรายงาน
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="#">Wifi</a>
+                <a href="#">Printer RICOH</a>
+                <a href="">Printer Sticker</a>
+                <a href="#">CCTV</a>
+                <a href="">Wall Rack</a>
+            </div>
+            <a href="login/logout.php" id="logout">ออกจากระบบ</a>
+    </div>
+<!-- End Side Navbar -->
 
-<!-- ######################## Sub Navbar ######################### -->
-    <nav class="navbar navbar-light bg-light" id="sub-nav"><div class="ms-3">ระบบตรวจเช็คอุปกรณ์ทางคอมพิวเตอร์</div></nav>
-<!-- #############################################################-->
-
-<!-- ####################### Side bar ############################-->
-   <nav id="mySidebar" class="sidebar">
-       
-        <a href="#" style="pointer-events: none; cursor:default;">  <h3><?php echo $_SESSION['username']; ?> </h3></a>
-        <a href="#">Menu 1</a>
-        <a href="#">Menu 1</a>
-        <a href="#">Menu 1</a>
-        <a href="#">Menu 1</a>
-        <a href="login/logout.php" class="btn-logout">ออกจากระบบ</a>
-    </nav>
-<!-- #############################################################-->
 </body>
 </html>
 
-
-<script type="text/javascript">
-
+<!-- Script for Mobile -->
+<script>
 function openNav() {
-var sb = document.getElementById("mySidebar");
-var mn = document.getElementById("main");
-var c = document.getElementById("collapse");
-var btn_text =document.getElementById("button-text");
+    var sb = document.getElementById("Sidebar");
+    var cls_btn = document.getElementById("closeBtn");
 
-    if(sb.style.width=="200px"){
+    if(sb.style.width=="250px"){
         sb.style.width="0px";
-        c.style.backgroundColor="orange";
-
-        // mn.style.marginLeft="250px";
+        cls_btn.style.backgroundColor="orange";        
     }else {
-        sb.style.width="200px";
-        c.style.backgroundColor="red";
-        // mn.style.marginLeft="0";
+        sb.style.width="250px";
+        cls_btn.style.backgroundColor="red";
     }
 }
 
+//โค๊ด Side bar Dropdown 
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+    dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+        } else {
+        dropdownContent.style.display = "block";
+        }
+    });
+    }
 </script>
