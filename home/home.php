@@ -12,10 +12,18 @@
     <?php 
         include 'include/header.php' ;     
     ?>
-    <title>Home</title>
+    
 </head>
 <body>
     <?php include 'template/top.php'; ?>
+    <div class="container">
+        <?php 
+        $page = $_GET['page'];
+        if($page == 'home'){echo "<title>หน้าแรก</title>";}
+        else if($page=="wifi"){include 'form/wifi/wifi.php';}
+         ?>
+    </div>
+
 </body>
 </html>
 

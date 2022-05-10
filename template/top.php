@@ -21,16 +21,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home_d" aria-current="page" href="#">หน้าหลัก</a>
+                    <a class="nav-link active" id="home_d" aria-current="page" href="?page=home">หน้าหลัก</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">แบบฟอร์ม Checklist</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Wifi</a></li>
-                        <li><a class="dropdown-item" href="#">Printer RICOH</a></li>
-                        <li><a class="dropdown-item" href="#">Printer Sticker</a></li>
-                        <li><a class="dropdown-item" href="#">CCTV</a></li>
-                        <li><a class="dropdown-item" href="#">Wall Rack</a></li>
+                        <li><a class="dropdown-item" href="?page=wifi">Wifi</a></li>
+                        <li><a class="dropdown-item" href="?page=printer_r">Printer RICOH</a></li>
+                        <li><a class="dropdown-item" href="?page=printer_s">Printer Sticker</a></li>
+                        <li><a class="dropdown-item" href="?page=cctv">CCTV</a></li>
+                        <li><a class="dropdown-item" href="?page=wallrack">Wall Rack</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
