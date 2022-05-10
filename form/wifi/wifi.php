@@ -7,50 +7,125 @@
     <title>Check list Wifi</title>
 </head>
 <body>
-    <div class="contrainer">
-        <div class="row mt-5">
-            
+    <div class="container-fluid">
+        <div class="row mt-5"> 
+            <div class="col"></div>           
             <div class="col-sm-5 ">
                 <div class="card" >
-                    <div class="card-header"><h5>Check-list : WIFI</h5></div>
-                    <form action="method">
+                        <div class="card-header">
+                            <h5>Check-list : WIFI <i class="fa fa-wifi"></i></h5>
+                        </div>
+                        <form action="#" action="post">
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    <div class="card-title"> วันที่และเวลา</div>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span></div>
-                                        <input type="date" class="form-control-sm mb-3" name="check_date">                                        
+                                    <div class="card-title"> <h5>วันที่และเวลา</h5></div>
+                                    <div class="input-group mb-3 input-group-sm">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar" ></i></span></div>
+                                        <input type="date" class="form-control form-control-sm" id="check_date" name="check_date" value="<?php echo date("Y-m-d"); ?>">                                   
                                     </div>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span></div>
-                                        <input type="time" class="form-control-sm mb-3" name="check_time">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-clock-o" ></i></span></div>
+                                        <input type="time" class="form-control form-control-sm" id="check_time" name="check_time" value="<?php echo date("H:i"); ?>">
                                     </div>                                    
                                 </li>
+
                                 <li class="list-group-item">
-                                    <div class="card-title">ชื่อ WIFI</div>
-                                    <select class="form-control-sm mb-3" name="Wifi_name" id="Wifi_name">
-                                        <option value="">เลือก Wifi</option>
-                                        <option value="">Wifi 1</option>
-                                        <option value="">Wifi 2</option>
-                                        <option value="">Wifi 3</option>
-                                        <option value="">Wifi 4</option>
-                                    </select>
+                                    <div class="card-title"><h5>ชื่อ WIFI</h5></div>
+                                    <div class="input-group mb-3 input-group-sm ">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-wifi" ></i></span></div>
+                                        <select class="form-control form-control-sm" name="Wifi_name" id="Wifi_name" required>
+                                            <option value="">เลือก Wifi</option>
+                                            <option value="">Wifi 1</option>
+                                            <option value="">Wifi 2</option>
+                                            <option value="">Wifi 3</option>
+                                            <option value="">Wifi 4</option>
+                                        </select>
+                                    </div>        
                                 </li>
+                                
                                 <li class="list-group-item">
-                                    <div class="card-title">การ Ping</div>
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                                <input type="radio" class="form-control-sm" name="ping_status" value="1">
+                                    <div class="card-title"><h5>สถานะ Ping <i class="fa fa-signal"></i></h5></div>
+                                    <div class="input-group mb-3 input-group-sm">
+                                        <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="check_ping" name="check_ping" value="1"></div>
+                                        <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> Ping ได้</span>                                         
                                     </div>
+                                    <div class="input-group mb-3 input-group-sm">
+                                        <div class="input-group-text"><input type="radio" id="check_ping" name="check_ping" value="0"></div>
+                                        <span class="form-control form-control-sm"><i class="fa fa-times" style="color:red;"></i> Ping ไม่ได้</span>
+                                    </div> 
+                                </li>
+
+                                <li class="list-group-item">
+                                    <div class="card-title"><h5>สถานะไฟ LED <i class="fa fa-lightbulb-o"></i></h5></div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                        <div class="card-title"> LED LAN </div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="lan_led" name="lan_led" value="1"></div>
+                                                <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> ปกติ</span>                                         
+                                            </div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-text"><input type="radio" id="lan_led" name="lan_led" value="0"></div>
+                                                <span class="form-control form-control-sm"><i class="fa fa-times" style="color:red;"></i> ผิดปกติ</span>
+                                            </div> 
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                        <div class="card-title"> LED 2.4 Ghz</div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="24g_led" name="24g_led" value="1"></div>
+                                                <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> ปกติ</span>                                         
+                                            </div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-text"><input type="radio" id="24g_led" name="24g_led" value="0"></div>
+                                                <span class="form-control form-control-sm"><i class="fa fa-times" style="color:red;"></i> ผิดปกติ</span>
+                                            </div> 
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                        <div class="card-title"> LED 5.0 Ghz</div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="5g_led" name="5g_led" value="1"></div>
+                                                <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> ปกติ</span>                                         
+                                            </div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-text"><input type="radio" id="5g_led" name="5g_led" value="0"></div>
+                                                <span class="form-control form-control-sm"><i class="fa fa-times" style="color:red;"></i> ผิดปกติ</span>
+                                            </div> 
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                        <div class="card-title"> LED Power</div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="5g_led" name="5g_led" value="1"></div>
+                                                <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> ปกติ</span>                                         
+                                            </div>
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group-text"><input type="radio" id="5g_led" name="5g_led" value="0"></div>
+                                                <span class="form-control form-control-sm"><i class="fa fa-times" style="color:red;"></i> ผิดปกติ</span>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </li>                             
+
+                                <li class="list-group-item">
+                                    
                                 </li>
                             </ul>
                         </div>
-                        <div class="card-footer">
-                            <input type="button" class="btn btn-primary" value="ตกลง">
-                        </div>
-                    </form>
-                </div>
+                </div> <!-- card -->                 
+                <div class="card-footer"><input type="submit" class="btn btn-primary" value="ตกลง"></div> </form>                                    
             </div>
+            <div class="col"></div>
+        </div>           
     </div>
 </body>
 </html>

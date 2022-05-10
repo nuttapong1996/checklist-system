@@ -11,7 +11,7 @@
 </head>
 <body>
 <!-- Nav bar Desktop -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"> <img src="img/logo/icon.png" width="30" height="27"> <label for="">ระบบ Checklist</label></a>
         <button class="navbar-toggler" id="closeBtn" type="button" data-bs-toggle="collapse" onclick="openNav()">
@@ -69,17 +69,17 @@
             <div class="dropdown-container">
                 <a href="#">แก้ไขข้อมูลส่วนตัว</a>
             </div>           
-            <a href="#" id="home_a">หน้าหลัก</a>
+            <a href="?page=home" id="home_a">หน้าหลัก</a>
             <button class="dropdown-btn">
                 แบบฟอร์ม Checklist
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="#">Wifi</a>
-                <a href="#">Printer RICOH</a>
-                <a href="">Printer Sticker</a>
-                <a href="#">CCTV</a>
-                <a href="">Wall Rack</a>
+                <a href="?page=wifi">Wifi</a>
+                <a href="?page=printer_r">Printer RICOH</a>
+                <a href="?page=printer_s">Printer Sticker</a>
+                <a href="page=cctv">CCTV</a>
+                <a href="?page=wallrack">Wall Rack</a>
             </div>
             <button class="dropdown-btn">
                 ออกรายงาน
