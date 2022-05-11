@@ -61,7 +61,7 @@
 
                                     <div class="card mb-3">
                                         <div class="card-body">
-                                        <div class="card-title"> LED LAN </div>
+                                        <div class="card-title"> LED : LAN </div>
                                             <div class="input-group mb-3 input-group-sm">
                                                 <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="lan_led" name="lan_led" value="1"></div>
                                                 <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> ปกติ</span>                                         
@@ -75,7 +75,7 @@
 
                                     <div class="card mb-3">
                                         <div class="card-body">
-                                        <div class="card-title"> LED 2.4 Ghz</div>
+                                        <div class="card-title"> LED : 2.4 Ghz</div>
                                             <div class="input-group mb-3 input-group-sm">
                                                 <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="24g_led" name="24g_led" value="1"></div>
                                                 <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> ปกติ</span>                                         
@@ -89,7 +89,7 @@
 
                                     <div class="card mb-3">
                                         <div class="card-body">
-                                        <div class="card-title"> LED 5.0 Ghz</div>
+                                        <div class="card-title"> LED : 5.0 Ghz</div>
                                             <div class="input-group mb-3 input-group-sm">
                                                 <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="5g_led" name="5g_led" value="1"></div>
                                                 <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> ปกติ</span>                                         
@@ -103,13 +103,13 @@
 
                                     <div class="card mb-3">
                                         <div class="card-body">
-                                        <div class="card-title"> LED Power</div>
+                                        <div class="card-title"> LED : Power</div>
                                             <div class="input-group mb-3 input-group-sm">
-                                                <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="5g_led" name="5g_led" value="1"></div>
+                                                <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="power_led" name="power_led" value="1"></div>
                                                 <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> ปกติ</span>                                         
                                             </div>
                                             <div class="input-group mb-3 input-group-sm">
-                                                <div class="input-group-text"><input type="radio" id="5g_led" name="5g_led" value="0"></div>
+                                                <div class="input-group-text"><input type="radio" id="power_led" name="power_led" value="0"></div>
                                                 <span class="form-control form-control-sm"><i class="fa fa-times" style="color:red;"></i> ผิดปกติ</span>
                                             </div> 
                                         </div>
@@ -117,8 +117,17 @@
                                 </li>                             
 
                                 <li class="list-group-item">
-                                    
+                                <div class="card-title"><h5>เวลาทำงานของ WIFI <i class="fa fa-clock-o"></i></h5></div>
+                                    <div class="input-group mb-3 input-group-sm">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-refresh"></i>&nbsp; Restart</span></div>
+                                        <input type="time" class="form-control form-control-sm" id="re_time" name="re_time" onchange="disDiff()">
+                                    </div>
+                                    <div class="input-group mb-3 input-group-sm">
+                                        <div class="input-group-prepend"><span class="input-group-text">Uptime : </span></div>
+                                        <input type="text" class="form-control form-control-sm" id="uptime" name="uptime" readonly>
+                                    </div>
                                 </li>
+
                             </ul>
                         </div>
                 </div> <!-- card -->                 
@@ -129,3 +138,29 @@
     </div>
 </body>
 </html>
+
+<script>
+
+var time_start = document.getElementById('check_time').value;
+var time_restart = document.getElementById('re_time').value;
+var up_time = document.getElementById('uptime');
+
+function diff(time_start, time_restart) {
+    time_start = time_start.split(":");
+    time_restart = time_restart.split(":");
+    var startDate = new Date(0, 0, 0, time_start[0], time_start[1], 0);
+    var endDate = new Date(0, 0, 0, time_restart[0], time_restart[1], 0);
+    var diff = endDate.getTime() - startDate.getTime();
+    var hours = Math.floor(diff / 1000 / 60 / 60);
+    diff -= hours * 1000 * 60 * 60;
+    var minutes = Math.floor(diff / 1000 / 60);
+    
+    return  hours +(hours > 0 ? "h" : "")  + ":" + (minutes < 9 ? "0" : "") + minutes+"m";
+}
+
+function disDiff(){
+    up_time.value = diff(time_start, time_restart);
+}
+
+
+</script>
