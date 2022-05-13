@@ -31,6 +31,7 @@ var DifferenceHours = function(options) {
     this.diff_hours = function(time1, time2, result) {
         vars.first_hour_split = $('#' + time1).val().split(':');
         vars.second_hour_split = $('#' + time2).val().split(':');
+        //vars.$el = $('#' + result).val();
         vars.$el = $('#' + result);
 
         let hours;
@@ -57,7 +58,7 @@ var DifferenceHours = function(options) {
                 _minute = minute;
             }
 
-            vars.$el.text(_hours + 'h' + _minute + 'm')
+            vars.$el.text(_hours + ' ชั่วโมง' + " : " + _minute + ' นาที');
 
         } else if (parseInt(vars.second_hour_split[0]) > parseInt(vars.first_hour_split[0])) {
             if (parseInt(vars.second_hour_split[1]) < parseInt(vars.first_hour_split[1])) {
@@ -84,7 +85,7 @@ var DifferenceHours = function(options) {
                     final_min = minute;
                 }
 
-                vars.$el.text(final_hours + 'h' + " : " + final_min)
+                vars.$el.text(final_hours + ' ชั่วโมง' + " : " + final_min + " นาที");
             }
 
             if (parseInt(vars.second_hour_split[1]) === parseInt(vars.first_hour_split[1])) {
@@ -97,7 +98,7 @@ var DifferenceHours = function(options) {
                     final_hours = hours;
                 }
 
-                vars.$el.text(final_hours + 'h' + ' : 00')
+                vars.$el.text(final_hours + ' ชั่วโมง' + ' : 00 นาที');
             }
 
         } else if (parseInt(vars.first_hour_split[0]) > parseInt(vars.second_hour_split[0])) {
@@ -138,7 +139,7 @@ var DifferenceHours = function(options) {
                 _min = tmp_new_min_mod
             }
 
-            vars.$el.text(_hours + 'h' + ' : ' + _min + 'm')
+            vars.$el.text(_hours + ' ชั่วโมง' + ' : ' + _min + ' นาที');
         } else if (parseInt(vars.first_hour_split[0]) === parseInt(vars.second_hour_split[0])) {
             hours = '00';
             let minute = 0;
@@ -147,24 +148,24 @@ var DifferenceHours = function(options) {
             }
 
             if (minute < 10) {
-                vars.$el.text(hours + 'h0' + ' : ' + minute + "m")
+                vars.$el.text(hours + ' ชั่วโมง' + ' : 0' + minute + " นาที");
             } else {
-                vars.$el.text(hours + 'h' + " : " + minute + "m")
+                vars.$el.text(hours + ' ชั่วโมง' + " : " + minute + " นาที")
             }
         } else if (parseInt(vars.first_hour_split[0]) === 0 && parseInt(vars.first_hour_split[1]) === 0) {
             hours = parseInt(vars.second_hour_split[0]);
             minute = parseInt(vars.second_hour_split[1]);
 
             if (hours === 0) {
-                vars.$el.text('00h : ' + minute)
+                vars.$el.text('00 ชั่วโมง : ' + minute + ' นาที');
             } else if (minute === 0) {
                 if (hours < 10) {
-                    vars.$el.text('0' + hours + 'h : 00');
+                    vars.$el.text('0' + hours + ' ชั่วโมง : 00 นาที');
                 } else {
-                    vars.$el.text(hours + 'h : 00');
+                    vars.$el.text(hours + ' ชั่วโมง : 00 นาที');
                 }
             } else {
-                vars.$el.text(hours + 'h' + " : " + minute + "m")
+                vars.$el.text(hours + ' ชั่วโมง ' + " : " + minute + " นาที")
             }
         }
     };

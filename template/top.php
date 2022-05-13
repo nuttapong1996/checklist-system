@@ -26,7 +26,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">แบบฟอร์ม Checklist</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="?page=wifi">Wifi</a></li>
+                        <li><a class="dropdown-item" href="?page=wifi"><i class="fa fa-wifi"></i> Wifi </a> </li>
                         <li><a class="dropdown-item" href="?page=printer_r">Printer RICOH</a></li>
                         <li><a class="dropdown-item" href="?page=printer_s">Printer Sticker</a></li>
                         <li><a class="dropdown-item" href="?page=cctv">CCTV</a></li>
@@ -36,7 +36,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ออกรายงาน</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Wifi</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa fa-wifi"></i> Wifi</a></li>
                         <li><a class="dropdown-item" href="#">Printer RICOH</a></li>
                         <li><a class="dropdown-item" href="#">Printer Sticker</a></li>
                         <li><a class="dropdown-item" href="#">CCTV</a></li>
@@ -75,7 +75,7 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="?page=wifi">Wifi</a>
+                <a href="?page=wifi"><i class="fa fa-wifi"></i> Wifi</a>
                 <a href="?page=printer_r">Printer RICOH</a>
                 <a href="?page=printer_s">Printer Sticker</a>
                 <a href="page=cctv">CCTV</a>
@@ -86,7 +86,7 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="#">Wifi</a>
+                <a href="#"><i class="fa fa-wifi"></i> Wifi</a>
                 <a href="#">Printer RICOH</a>
                 <a href="">Printer Sticker</a>
                 <a href="#">CCTV</a>
