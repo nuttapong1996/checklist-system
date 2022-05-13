@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/differenceHours.js"></script>
     <title>Check list Wifi</title>
 </head>
 <body>
@@ -120,11 +121,12 @@
                                 <div class="card-title"><h5>เวลาทำงานของ WIFI <i class="fa fa-clock-o"></i></h5></div>
                                     <div class="input-group mb-3 input-group-sm">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-refresh"></i>&nbsp; Restart</span></div>
-                                        <input type="time" class="form-control form-control-sm" id="re_time" name="re_time" onchange="disDiff()">
+                                        <input type="time" class="form-control form-control-sm" id="re_time" name="re_time">
                                     </div>
                                     <div class="input-group mb-3 input-group-sm">
                                         <div class="input-group-prepend"><span class="input-group-text">Uptime : </span></div>
-                                        <input type="text" class="form-control form-control-sm" id="uptime" name="uptime" readonly>
+                                        <span class="form-control form-control-sm" id="uptime" name="uptime" style="text-align:center;">00h:00m</span>
+                                        <!-- <input type="text" class="form-control form-control-sm" id="uptime" name="uptime"  readonly> -->
                                     </div>
                                 </li>
 
@@ -141,26 +143,9 @@
 
 <script>
 
-var time_start = document.getElementById('check_time').value;
-var time_restart = document.getElementById('re_time').value;
-var up_time = document.getElementById('uptime');
-
-function diff(time_start, time_restart) {
-    time_start = time_start.split(":");
-    time_restart = time_restart.split(":");
-    var startDate = new Date(0, 0, 0, time_start[0], time_start[1], 0);
-    var endDate = new Date(0, 0, 0, time_restart[0], time_restart[1], 0);
-    var diff = endDate.getTime() - startDate.getTime();
-    var hours = Math.floor(diff / 1000 / 60 / 60);
-    diff -= hours * 1000 * 60 * 60;
-    var minutes = Math.floor(diff / 1000 / 60);
-    
-    return  hours +(hours > 0 ? "h" : "")  + ":" + (minutes < 9 ? "0" : "") + minutes+"m";
-}
-
-function disDiff(){
-    up_time.value = diff(time_start, time_restart);
-}
+$('input').on('keyup change',function () {
+  differenceHours.diff_hours('check_time', 're_time', 'uptime')
+});
 
 
 </script>
