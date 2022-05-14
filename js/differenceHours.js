@@ -60,6 +60,7 @@ var DifferenceHours = function(options) {
 
             vars.$el.text(_hours + ' ชั่วโมง' + " : " + _minute + ' นาที');
 
+
         } else if (parseInt(vars.second_hour_split[0]) > parseInt(vars.first_hour_split[0])) {
             if (parseInt(vars.second_hour_split[1]) < parseInt(vars.first_hour_split[1])) {
 

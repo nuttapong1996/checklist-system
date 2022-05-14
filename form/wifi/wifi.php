@@ -37,10 +37,10 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-wifi" ></i></span></div>
                                         <select class="form-control form-control-sm" name="Wifi_name" id="Wifi_name" required>
                                             <option value="">เลือก Wifi</option>
-                                            <option value="">Wifi 1</option>
-                                            <option value="">Wifi 2</option>
-                                            <option value="">Wifi 3</option>
-                                            <option value="">Wifi 4</option>
+                                            <option value="Wifi 1">Wifi 1</option>
+                                            <option value="Wifi 2">Wifi 2</option>
+                                            <option value="Wifi 3">Wifi 3</option>
+                                            <option value="Wifi 4">Wifi 4</option>
                                         </select>
                                     </div>        
                                 </li>
@@ -125,7 +125,8 @@
                                     </div>
                                     <div class="input-group mb-3 input-group-sm">
                                         <div class="input-group-prepend"><span class="input-group-text">Uptime : </span></div>                                
-                                        <span type="text" class="form-control form-control-sm" id="uptime" name="uptime" style="text-align:center; padding: 8px 0px 4px 0px;" >00h:00m</span>
+                                        <span type="text" class="form-control form-control-sm" id="upt_show" style="text-align:center; padding: 8px 0px 4px 0px;" >00h:00m</span>
+                                        <input type="hidden" id="uptime" name="uptime" placeholder="00h:00m">
                                     </div>
                                 </li>
 
@@ -199,8 +200,7 @@
   </div>
 </div>
 
-
-
-
-
-<script>$('input').on('keyup change',function () {differenceHours.diff_hours('re_time', 'check_time', 'uptime')});</script>
+<script>
+    $('input').on('keyup change',function () {differenceHours.diff_hours('re_time', 'check_time', 'upt_show')});
+    $('input').on('keyup change',function () {var $val =$('#upt_show').text(); $('#uptime').val($val);});
+</script>
