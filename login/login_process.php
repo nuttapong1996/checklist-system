@@ -5,11 +5,12 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM tb_user WHERE username = '$username' AND password = '$password'";
+    $sql = "SELECT * FROM tbl_user WHERE username = '$username' AND password = '$password'";
     $result = $mysqli->query($sql);
 
     if($result->num_rows >0){
         while($row = $result->fetch_assoc()){
+            $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['user_code'] = $row['user_code'];
             $_SESSION['f_name'] = $row['fname'];

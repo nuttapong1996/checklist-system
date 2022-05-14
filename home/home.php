@@ -14,12 +14,16 @@
     ?>
     
 </head>
-<body>
+<body >
     <?php include 'template/top.php'; ?>
     <div class="container">
         <?php 
         $page = $_GET['page'];
-        if($page == 'home'){echo "<title>หน้าแรก</title>";}
+        if($page == 'home')
+        {
+          echo "<title>หน้าแรก</title>";
+          include 'template/home_holder.php';          
+        }
         else if($page=="wifi"){include 'form/wifi/wifi.php';}
         elseif($page=="printer_r"){include 'form/printer/printer_r.php';}
         elseif($page=="printer_s"){include 'form/printer/printer_s.php';}

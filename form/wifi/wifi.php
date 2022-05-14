@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/differenceHours.js"></script>
-    <title>Check list Wifi</title>
+    <title>Checklist : Wifi</title>
 </head>
 <body>
     <div class="container-fluid">
@@ -13,14 +13,14 @@
             <div class="col"></div>           
             <div class="col-sm-5 ">
                 <div class="card" >
-                        <div class="card-header">
+                        <div class="card-header bg-warning">
                             <h5>Check-list : WIFI <i class="fa fa-wifi"></i></h5>
                         </div>
                         <form id="form-check" action="form/wifi/wifi-check.php" method="post">
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    <div class="card-title"> <h5>วันที่และเวลา</h5></div>
+                                    <div class="card-title"> <h5>วันที่และเวลา <i class="fa fa-calendar"></i></h5></div>
                                     <div class="input-group mb-3 input-group-sm">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar" ></i></span></div>
                                         <input type="date" class="form-control form-control-sm" id="check_date" name="check_date" value="<?php echo date("Y-m-d"); ?>">                                   
@@ -148,7 +148,7 @@
                                 </li>
 
                                 <li class="list-group-item">                                    
-                                    <div class="card-title"><h5>ตัวกล่องเราท์เตอร์</h5></div>
+                                    <div class="card-title"><h5>ตัวกล่องเราท์เตอร์ <i class="fa fa-cube"></i></h5></div>
                                     <div class="card mb-3">
                                         <div class="card-body">
                                         <div class="card-title"> ฝุ่น </div>  
@@ -164,12 +164,27 @@
                                     </div>                                   
                                 </li>
 
+                                <li class="list-group-item  bg-warning">                                    
+                                    <div class="card-title"><h5>สถานะของอุปกรณ์ <i class="fa fa-heartbeat"></i></h5></div>
+                                    <div class="input-group mb-3 input-group-sm">
+                                        <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="mc_status" name="mc_status" value="1" required></div>
+                                        <span class="form-control form-control-sm " ><i class="fa fa-check" style="color:green;"></i> <b>ใช้ได้ปกติ</b></span>
+                                    </div>                                            
+                                    <div class="input-group mb-3 input-group-sm">
+                                        <div class="input-group-text"><input type="radio" class="form-check-input mt-0" id="mc_status" name="mc_status" value="0" required></div>
+                                        <span class="form-control form-control-sm"><i class="fa fa-times" style="color:red;"></i> <b>ชำรุด</b></span>
+                                    </div>                              
+                                </li>
+                                <li class="list-group-item"></li>
+                                <li class="list-group-item bg-warning">
+                                    <div class="card-title"><h5>หมายเหตุ <i class="fa fa-info-circle"></i></h5></div>                                    
+                                    <textarea class="form-control form-control-sm" id="remark" name="remark" rows="3" required></textarea>       
+                                </li>
                             </ul>
                         </div>
                 </div> <!-- card -->     
                             
                 <div class="card-footer" > 
-                    <button class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >ยกเลิก</button>
                     <input type="submit" class="btn btn-primary"  value="ตกลง">
                     </form> 
                 </div>                                
@@ -181,24 +196,7 @@
 </html>
 
 
-<!-- Modal ยกเลิก -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content ">
-      <div class="modal-header bg-danger">
-        <h5 class="modal-title" id="staticBackdropLabel" style="color:white; font-weight:bold;">ยกเลิก</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        คุณต้องการยกเลิกใช่หรือไม่ ?
-      </div>
-      <div class="modal-footer">
-          <a class="btn btn-danger" href="?page-home">ยกเลิก</a>
-        <button type="button" class="btn btn-primary"data-bs-dismiss="modal">ไม่</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <script>
     $('input').on('keyup change',function () {differenceHours.diff_hours('re_time', 'check_time', 'upt_show')});
