@@ -16,6 +16,7 @@ $led_power=$_POST['power_led'];
 $lan_wire=$_POST['lan_wire'];
 $wifi_dust=$_POST['dust'];
 $mc_status = $_POST['mc_status'];
+$rp_status = $_POST['rp_status'];
 $remark= $_POST['remark'];
 $user_id = $_SESSION['user_id'];
 
@@ -24,8 +25,8 @@ $c_date = $check_date ->format('d-m-Y');
 $c_time = $check_time->format('H:i:s');
 $r_time = $re_time->format('H:i:s');
 
-$strSql= "INSERT INTO tbl_checklist_wifi(wifi_index,check_date,check_time,re_time,up_time,check_ping,led_lan,led_24g,led_5g,led_power,lan_wire,wifi_dust,mc_status,remark,user_id) 
-VALUES('$Wifi_name','$c_date','$c_time','$r_time','$up_time','$check_ping','$led_lan','$led_24g','$led_5g','$led_power','$lan_wire','$wifi_dust','$mc_status','$remark','$user_id');";
+$strSql= "INSERT INTO tbl_checklist_wifi(wifi_index,check_date,check_time,re_time,up_time,check_ping,led_lan,led_24g,led_5g,led_power,lan_wire,wifi_dust,mc_status,rp_status,remark,user_id,approve_status) 
+VALUES('$Wifi_name','$c_date','$c_time','$r_time','$up_time','$check_ping','$led_lan','$led_24g','$led_5g','$led_power','$lan_wire','$wifi_dust','$mc_status','$rp_status','$remark','$user_id','0');";
 
 $result =$mysqli->query($strSql);
 
