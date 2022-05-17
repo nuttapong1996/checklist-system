@@ -20,7 +20,7 @@
                         <div class="card-header bg-warning">
                             <h5>Check-list : WIFI <i class="fa fa-wifi"></i></h5>
                         </div>
-                        <form id="form-check" action="form/wifi/wifi-check.php" method="post">
+                        <form id="form-check" action="form/wifi/wifi-check.php" method="POST">
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
