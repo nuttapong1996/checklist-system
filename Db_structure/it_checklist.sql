@@ -10,10 +10,26 @@ Target Server Type    : MYSQL
 Target Server Version : 100421
 File Encoding         : 65001
 
-Date: 2022-05-17 16:41:45
+Date: 2022-05-25 16:50:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for tbl_auto_number
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_auto_number`;
+CREATE TABLE `tbl_auto_number` (
+  `no_id` int(11) NOT NULL AUTO_INCREMENT,
+  `year` varchar(10) DEFAULT NULL,
+  `number` int(4) DEFAULT NULL,
+  PRIMARY KEY (`no_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_auto_number
+-- ----------------------------
+INSERT INTO `tbl_auto_number` VALUES ('1', '2022', '1');
 
 -- ----------------------------
 -- Table structure for tbl_checklist_wifi
@@ -21,6 +37,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `tbl_checklist_wifi`;
 CREATE TABLE `tbl_checklist_wifi` (
   `chk_id` int(11) NOT NULL,
+  `chk_code` varchar(16) DEFAULT '',
   `wifi_id` int(11) DEFAULT NULL,
   `check_date` varchar(255) DEFAULT '',
   `check_time` varchar(255) DEFAULT '',
@@ -86,8 +103,8 @@ INSERT INTO `tbl_list_wifi` VALUES ('4', 'WIFI 4');
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_repair_wifi`;
 CREATE TABLE `tbl_repair_wifi` (
-  `rp_id` int(11) NOT NULL,
-  `chk_id` int(11) DEFAULT NULL,
+  `rp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `chk_code` varchar(16) DEFAULT '',
   `rp_status` int(11) DEFAULT NULL,
   `rp_date` varchar(255) DEFAULT NULL,
   `rp_comments` varchar(255) DEFAULT NULL,

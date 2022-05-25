@@ -32,12 +32,15 @@ $result =$mysqli->query($strSql);
 
 
 if($result){
+   /*  if($rp_status=='1')
+    {} */
     echo "<script>alert('บันทึกข้อมูลเรียบร้อย');</script>";
     echo "<script>window.location='../../index.php?page=home';</script>";
 }else{
     echo "<script>alert('ไม่สามารถบันทึกข้อมูลได้');</script>";
     echo "<script>history.back(-1);</script>";
 }
+
 
 $mysqli->close();
 
