@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <?php 
-    include('include/DbConnect.php'); 
-    $DbConnect = dbConnect();
+    include('include/DbConnect.php');
+    include('include/Chk-function.php');
 ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,14 +53,8 @@
                                     <div class="input-group mb-3 input-group-sm ">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-wifi" ></i></span></div>
                                         <select class="form-control form-control-sm" name="Wifi_name" id="Wifi_name" required>
-                                            <?php 
-                                                $sqlwifi = "SELECT * FROM tbl_list_wifi;";
-                                                $resultwifi= $DbConnect->query($sqlwifi);
-                                             ?>
                                             <option value="">เลือก Wifi</option>
-                                            <?php while($rowwifi = $resultwifi->fetch_assoc()){ ?>
-                                                <option value="<?php echo $rowwifi['wifi_id']; ?>"><?php echo $rowwifi['wifi_name']; ?></option>
-                                            <?php } ?>
+                                            <?php getWifi(); ?>
                                         </select>
                                     </div>        
                                 </li>
@@ -171,6 +165,7 @@
                                         </div>
                                     </div>                                   
                                 </li>
+
                                 <li class="list-group-item  bg-warning">
                                 <div class="card-title"><h5>สรุป <i class="fa fa-inbox"></i></h5></div>
                                 </li>          
@@ -185,22 +180,18 @@
                                         <span class="form-control form-control-sm"><i class="fa fa-times" style="color:red;"></i> ชำรุด</span>
                                     </div>                              
                                 </li>
+
                                 <li class="list-group-item "style="background-color:#FEF9E7;">
                                     <div class="card-title">สถานะการแจ้งซ่อม <i class="fa fa-wrench"></i></div>
-                                    <?php 
-                                        $sqlEqs = "SELECT * FROM tbl_equipment_status WHERE eqs_id = '1' OR eqs_id ='2';";
-                                        $resultEqs = $DbConnect->query($sqlEqs);
-                                     ?>
                                      <div class="input-group input-group-sm mb-3">
                                          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-wrench"></i></span></div>
                                         <select class="form-control fotm-control-sm" name="rp_status" id="rp_status">
                                             <option value="">เลือกสถานะการแจ้งซ่อม</option>
-                                            <?php while($rowEqs =$resultEqs->fetch_assoc()){ ?>
-                                                <option  value="<?php echo $rowEqs['eqs_id']; ?>"><?php echo $rowEqs['eqs_name']; ?></option>
-                                            <?php } ?>
+                                            <?php  getEqs(); ?>
                                         </select>
                                      </div>
                                 </li>
+
                                 <li class="list-group-item " style="background-color:#FEF9E7;">
                                     <div class="card-title"><h5>หมายเหตุ <i class="fa fa-info-circle"></i></h5></div>                                    
                                     <textarea class="form-control form-control-sm" id="remark" name="remark" rows="3" required></textarea>       
@@ -210,22 +201,80 @@
                 </div> <!-- card -->     
                             
                 <div class="card-footer" > 
-                    <input type="submit" class="btn btn-primary"  value="ตกลง">
+                    <input type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal"  value="ตกลง">
                     </form> 
                 </div>                                
             </div>
             <div class="col"></div>
         </div>           
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ยืนยันการส่ง</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" onclick="SmForm()">ยืนยัน</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
-
-
-
 
 <script>
     $('input').on('keyup change',function () {differenceHours.diff_hours('re_time', 'check_time', 'upt_show')});
     $('input').on('keyup change',function () {var $val =$('#upt_show').text(); $('#uptime').val($val);});
-
     
+    function SmForm(){
+        document.getElementById("form-check").submit();
+    }
 </script>
+
+<?php 
+
+//ฟังชั่นรันเลขใบเช็คลิส
+    //$Chk_prefix คือโค๊ดนำหน้าของเช็คลิสแต่ละหมวดมีอยู่ 3 หลัก รูป String จำเป็นต้องใส่เมื่อเรียกใช้ฟังชั่น Example: WIFI คือ WIF 
+    function Chkgencode(){ 
+        $eq = "wifi";
+        $Chk_prefix = "WIF";
+        $mysql = dbConnect(); //เรียกใช้ฟังชั่นต่อฐานข้อมูล
+        $sql= "SELECT * FROM  tbl_auto_number WHERE equipment =$eq;"; //เลือกข้อมูลจากตาราง tbl_auto_number ที่มี no_id ค่าเท่ากับ 1 
+        //tbl_auto_number จะประกอบไปด้วย Colum no_id คือคีย์หลัก , year คือปีที่สร้างเลขใบเช็คลิส , no_number คือตัวเลขที่สร้างเลขใบเช็คลิส
+        $result = $mysql->query($sql);
+        $row = $result->fetch_array();
+
+        //หากปีที่ออกใบเช็คลิส == ปีที่อยู่ใน Colum year เช่น Colum year = 2022 เท่ากับปีนี้คือ 2022
+        if($row['year'] == date("Y")){
+            // ให้ทำการดึงค่าจาก Colum number ตัวอย่าง Colum number = 1 ค่าที่จะออกมาคือ 0001
+            $number = substr("0000".$row['number'],-4,4);
+            //นำค่ามารวมกันให้แสดงผลเป็นปีปัจจุบันตามด้วยเลขที่ใบ จะได้ผลลัพธ์ดังนี้ WIFI-2205-0001
+            $strNumber = $Chk_prefix."-".date("y").date("m")."-".$number; 
+
+            //อัพเดทให้ +1 ในใบต่อไปเรื่อยๆ จาก 0001 เป็น 0002 คือเลขของแผ่นต่อไป
+            $strPlusNumber="UPDATE tbl_auto_number SET number = number + 1 WHERE equipment =$eq;"; 
+            $strNextNumber =$mysql->query($strPlusNumber);
+
+        }else{
+        //หากปีปัจจุบัน =! ปีที่อยู่ใน Colum year (ขึ้นปีใหม่) เช่น Colum year = 2022 แต่ปีนี้ 2023
+            $number =substr("0001",-4,4); // ตั้งให้นับเป็น 0001 คือใบแรกของปี
+            //นำค่ามารวมกันให้แสดงผลเป็นปีปัจจุบันตามด้วยเลขที่ใบ จะได้ผลลัพธ์ดังนี้ WIFI-2301-0001
+            $strNumber = $Chk_prefix."-".date("y").date("m")."-".$number; 
+            
+            //อัพเดท Colum year = 2023 คือปีปัจจุบัน และ Colum number = 1 คือใบแรกของปี
+            $strPlusNumber="UPDATE tbl_auto_number SET year = '".date("Y")."', number = '1' WHERE equipment =$eq;";
+            $strNextNumber =$mysql->query($strPlusNumber);
+        }
+        echo $strNumber;
+        $mysql->close();
+}
+?>
