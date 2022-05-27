@@ -3,7 +3,7 @@
 <head>
 <?php 
     include('include/DbConnect.php');
-    include('include/Chk-function.php');
+    $mysql= dbConnect();
 ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
                         <div class="card-header bg-warning">
                             <h5>Check-list : WIFI <i class="fa fa-wifi"></i></h5>
                         </div>
-                        <form id="form-check" action="form/wifi/wifi-check.php" method="POST">
+                        <form id="form-check" action="form/wifi/wifi-check.php" method="post">
                         <div class="card-body">
                             <ul class="list-group list-group-flush">                              
                                 <li class="list-group-item">
@@ -54,7 +54,13 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-wifi" ></i></span></div>
                                         <select class="form-control form-control-sm" name="Wifi_name" id="Wifi_name" required>
                                             <option value="">เลือก Wifi</option>
-                                            <?php getWifi(); ?>
+                                            <?php 
+                                                $sqlwifi = "SELECT * FROM tbl_list_wifi;";
+                                                $resultwifi= $mysql->query($sqlwifi);
+                                                while($rowwifi = $resultwifi->fetch_assoc()){ 
+                                            ?>
+                                                 <option value="<?php echo $rowwifi['wifi_id']?>"><?php echo $rowwifi['wifi_name']?></option>';
+                                            <?php }?>
                                         </select>
                                     </div>        
                                 </li>
@@ -187,7 +193,13 @@
                                          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-wrench"></i></span></div>
                                         <select class="form-control fotm-control-sm" name="rp_status" id="rp_status">
                                             <option value="">เลือกสถานะการแจ้งซ่อม</option>
-                                            <?php  getEqs(); ?>
+                                            <?php
+                                                    $sqlstatus = "SELECT * FROM tbl_equipment_status WHERE eqs_id = '1' OR eqs_id ='2';";
+                                                    $resultstatus= $mysql->query($sqlstatus);
+                                                    while($rowstatus = $resultstatus->fetch_assoc()){ 
+                                             ?>
+                                                 <option value="<?php echo $rowstatus['eqs_id'];?>"> <?php echo $rowstatus['eqs_name'];?></option>;
+                                             <?php }?>
                                         </select>
                                      </div>
                                 </li>

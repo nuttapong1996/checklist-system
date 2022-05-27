@@ -7,7 +7,8 @@
 </head>
 <style>
     body{
-       background: url("img/list.png") no-repeat center center fixed  ;   
+       background: url("img/list.png") no-repeat center center fixed  ; 
+       background-size: 10% 20% ;  
     }
     @media screen and (max-width: 600px) {
   body {

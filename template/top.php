@@ -34,9 +34,9 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ออกรายงาน</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ประวัติ Checklist</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#"><i class="fa fa-wifi"></i> Wifi</a></li>
+                        <li><a class="dropdown-item" href="?page=history_wifi"><i class="fa fa-wifi"></i> Wifi</a></li>
                         <li><a class="dropdown-item" href="#">Printer RICOH</a></li>
                         <li><a class="dropdown-item" href="#">Printer Sticker</a></li>
                         <li><a class="dropdown-item" href="#">CCTV</a></li>
@@ -82,11 +82,11 @@
                 <a href="?page=wallrack">Wall Rack</a>
             </div>
             <button class="dropdown-btn">
-                ออกรายงาน
+                ประวัติ Checklist
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="#"><i class="fa fa-wifi"></i> Wifi</a>
+                <a href="?page=history_wifi"><i class="fa fa-wifi"></i> Wifi</a>
                 <a href="#">Printer RICOH</a>
                 <a href="">Printer Sticker</a>
                 <a href="#">CCTV</a>

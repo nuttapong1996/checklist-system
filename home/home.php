@@ -29,6 +29,8 @@
         elseif($page=="printer_s"){include 'form/printer/printer_s.php';}
         elseif($page=="cctv"){include 'form/cctv/cctv.php';}
         elseif($page=="wallrack"){include 'form/wallrack/wallrack.php';}
+
+        elseif($page=="history_wifi"){include 'history/wifi/wifi.php';}
          ?>
     </div>
     <button onclick="topFunction()" id="myBtn" title="Go to top"><i class=" fa fa-chevron-up fa-2x" aria-hidden="true"></i></button>

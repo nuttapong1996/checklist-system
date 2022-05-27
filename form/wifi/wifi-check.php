@@ -27,10 +27,12 @@ $r_time = $re_time->format('H:i:s');
 
 
 // โค๊ดสำหรับ gen เลขใบ checklist
+function gen_checklist_no(){
+    $mysql=dbConnect();
     $Chk_prefix = "WIF";
     $Chksql= "SELECT * FROM  tbl_auto_number WHERE no_id =1;"; //เลือกข้อมูลจากตาราง tbl_auto_number ที่มี no_id ค่าเท่ากับ 1 (Wifi อยู่ในลำดับ 1 ของตาราง)
     //tbl_auto_number จะประกอบไปด้วย Colum no_id คือคีย์หลัก , year คือปีที่สร้างเลขใบเช็คลิส , no_number คือตัวเลขที่สร้างเลขใบเช็คลิส
-    $Chkresult = mysqli_query($mysqli,$Chksql);
+    $Chkresult = mysqli_query($mysql,$Chksql);
     $row = mysqli_fetch_array($Chkresult);      
 
     //หากปีที่ออกใบเช็คลิส == ปีที่อยู่ใน Colum year เช่น Colum year = 2022 เท่ากับปีนี้คือ 2022
@@ -42,7 +44,7 @@ $r_time = $re_time->format('H:i:s');
 
         //อัพเดทให้ +1 ในใบต่อไปเรื่อยๆ จาก 0001 เป็น 0002 คือเลขของแผ่นต่อไป
         $strPlusNumber="UPDATE tbl_auto_number SET number = number + 1 WHERE no_id =1;"; 
-        $strNextNumber =$mysqli->query($strPlusNumber);
+        $strNextNumber =$mysql->query($strPlusNumber);
 
     }else{
     //หากปีปัจจุบัน =! ปีที่อยู่ใน Colum year (ขึ้นปีใหม่) เช่น Colum year = 2022 แต่ปีนี้ 2023
@@ -52,17 +54,26 @@ $r_time = $re_time->format('H:i:s');
         
         //อัพเดท Colum year = 2023 คือปีปัจจุบัน และ Colum number = 1 คือใบแรกของปี
         $strPlusNumber="UPDATE tbl_auto_number SET year = '".date("Y")."', number = '1' WHERE no_id =1;";
-        $strNextNumber =$mysqli->query($strPlusNumber);
-    }
+        $strNextNumber =$mysql->query($strPlusNumber);
+    } 
+
+    return $strNumber;
+}
 
 
+
+$chk_no = gen_checklist_no();
 
 
 $strSql= "INSERT INTO tbl_checklist_wifi(chk_code,wifi_id,check_date,check_time,re_time,up_time,check_ping,led_lan,led_24g,led_5g,led_power,lan_wire,wifi_dust,mc_status,rp_status,remark,user_id,approve_status) 
-VALUES('$strNumber','$Wifi_name','$c_date','$c_time','$r_time','$up_time','$check_ping','$led_lan','$led_24g','$led_5g','$led_power','$lan_wire','$wifi_dust','$mc_status','$rp_status','$remark','$user_id','0');";
+VALUES('$chk_no','$Wifi_name','$c_date','$c_time','$r_time','$up_time','$check_ping','$led_lan','$led_24g','$led_5g','$led_power','$lan_wire','$wifi_dust','$mc_status','$rp_status','$remark','$user_id','0');";
 
 $result =$mysqli->query($strSql);
 
+if($rp_status== 2){
+    $Sql_rp = "INSERT INTO tbl_repair_wifi(chk_code,rp_status,rp_date,rp_remark) VALUES('$chk_no','$rp_status',NOW(),'$remark');";
+    $result_rp =$mysqli->query($Sql_rp);
+}
 
 if($result){
     echo "<script>alert('บันทึกข้อมูลเรียบร้อย');</script>";
