@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100421
 File Encoding         : 65001
 
-Date: 2022-05-25 16:50:00
+Date: 2022-05-27 16:46:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,6 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `tbl_auto_number`;
 CREATE TABLE `tbl_auto_number` (
   `no_id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment` varchar(255) DEFAULT NULL,
   `year` varchar(10) DEFAULT NULL,
   `number` int(4) DEFAULT NULL,
   PRIMARY KEY (`no_id`)
@@ -29,7 +30,7 @@ CREATE TABLE `tbl_auto_number` (
 -- ----------------------------
 -- Records of tbl_auto_number
 -- ----------------------------
-INSERT INTO `tbl_auto_number` VALUES ('1', '2022', '1');
+INSERT INTO `tbl_auto_number` VALUES ('1', 'wifi', '2022', '2');
 
 -- ----------------------------
 -- Table structure for tbl_checklist_wifi
@@ -53,6 +54,7 @@ CREATE TABLE `tbl_checklist_wifi` (
   `mc_status` int(11) DEFAULT NULL,
   `rp_status` int(11) DEFAULT NULL,
   `remark` varchar(255) DEFAULT '',
+  `user_id` int(11) DEFAULT NULL,
   `approve_status` int(11) DEFAULT 0,
   `approver_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`chk_id`)
@@ -61,6 +63,7 @@ CREATE TABLE `tbl_checklist_wifi` (
 -- ----------------------------
 -- Records of tbl_checklist_wifi
 -- ----------------------------
+INSERT INTO `tbl_checklist_wifi` VALUES ('0', 'WIF-2205-0001', '2', '27-05-2022', '15:19:00', '06:00:00', '09 ชั่วโมง : 19 นาที', '0', '0', '1', '1', '1', '0', '1', '1', '2', 'สาย Lan ขาดแต่ตัวเราท์เตอร์ใช้งานได้อยู่', '2', '0', null);
 
 -- ----------------------------
 -- Table structure for tbl_equipment_status
@@ -107,13 +110,14 @@ CREATE TABLE `tbl_repair_wifi` (
   `chk_code` varchar(16) DEFAULT '',
   `rp_status` int(11) DEFAULT NULL,
   `rp_date` varchar(255) DEFAULT NULL,
-  `rp_comments` varchar(255) DEFAULT NULL,
+  `rp_remark` varchar(255) DEFAULT '',
   PRIMARY KEY (`rp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_repair_wifi
 -- ----------------------------
+INSERT INTO `tbl_repair_wifi` VALUES ('2', 'WIF-2205-0001', '2', '2022-05-27 15:20:26', 'สาย Lan ขาดแต่ตัวเราท์เตอร์ใช้งานได้อยู่');
 
 -- ----------------------------
 -- Table structure for tbl_user
