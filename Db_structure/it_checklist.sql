@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : Local
+ Source Server         : Dev-Site
  Source Server Type    : MySQL
- Source Server Version : 100422
+ Source Server Version : 100421
  Source Host           : localhost:3306
  Source Schema         : it_checklist
 
  Target Server Type    : MySQL
- Target Server Version : 100422
+ Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 27/05/2022 20:13:54
+ Date: 07/06/2022 12:47:39
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `tbl_auto_number`  (
   `year` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `number` int NULL DEFAULT NULL,
   PRIMARY KEY (`no_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_auto_number
@@ -55,17 +55,19 @@ CREATE TABLE `tbl_checklist_wifi`  (
   `wifi_dust` int NULL DEFAULT NULL,
   `mc_status` int NULL DEFAULT NULL,
   `rp_status` int NULL DEFAULT NULL,
+  `rp_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '',
   `user_id` int NULL DEFAULT NULL,
   `approve_status` int NULL DEFAULT 0,
   `approver_id` int NULL DEFAULT NULL,
   PRIMARY KEY (`chk_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_checklist_wifi
 -- ----------------------------
-INSERT INTO `tbl_checklist_wifi` VALUES (0, 'WIF-2205-0001', 2, '27-05-2022', '15:19:00', '06:00:00', '09 ชั่วโมง : 19 นาที', 0, 0, 1, 1, 1, 0, 1, 1, 2, 'สาย Lan ขาดแต่ตัวเราท์เตอร์ใช้งานได้อยู่', 2, 0, NULL);
+INSERT INTO `tbl_checklist_wifi` VALUES (0, 'WIF-2205-0001', 2, '27-06-2022', '15:19:00', '06:00:00', '09 ชั่วโมง : 19 นาที', 0, 0, 1, 1, 1, 0, 1, 1, 2, NULL, 'สาย Lan ขาดแต่ตัวเราท์เตอร์ใช้งานได้อยู่', 2, 0, NULL);
+INSERT INTO `tbl_checklist_wifi` VALUES (1, 'WIF-2205-0002', 3, '27-06-2022', '15:19:00', '06:00:00', '09 ชั่วโมง : 19 นาที', 0, 0, 1, 1, 1, 0, 1, 1, 2, NULL, 'สาย Lan ขาดแต่ตัวเราท์เตอร์ใช้งานได้อยู่', 2, 0, NULL);
 
 -- ----------------------------
 -- Table structure for tbl_equipment_status
@@ -75,7 +77,7 @@ CREATE TABLE `tbl_equipment_status`  (
   `eqs_id` int NOT NULL AUTO_INCREMENT,
   `eqs_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`eqs_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_equipment_status
@@ -93,7 +95,7 @@ CREATE TABLE `tbl_list_wifi`  (
   `wifi_id` int NOT NULL AUTO_INCREMENT,
   `wifi_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`wifi_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_list_wifi
@@ -114,7 +116,7 @@ CREATE TABLE `tbl_repair_wifi`  (
   `rp_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `rp_remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '',
   PRIMARY KEY (`rp_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_repair_wifi
@@ -136,7 +138,7 @@ CREATE TABLE `tbl_user`  (
   `position_id` int NULL DEFAULT NULL,
   `user_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_user

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php 
-       
+       include('include/DbConnect.php');
     ?>
     <title>ประวัติ Checklist</title>
 </head>
@@ -48,11 +48,37 @@
             <div class="col"></div>
             <div class="col-sm-12">                 
                 <table class="table" id="myTable">
+                    <?php 
+                        $mysqli = dbConnect();
+                        $strsql= "SELECT * FROM tbl_checklist_wifi WHERE substring(check_date,5,2) = month(NOW()) AND substring(check_date,7,4) = YEAR(NOW());";
+                        $result = $mysqli->query($strsql);            
+
+                     ?>
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>#</th>
+                            <th>เลขที่</th>
+                            <th>Wifi</th>
+                            <th>วันที่ตรวจเช็ค</th>
+                            <th>เวลาที่ตรวจเช็ค</th>
                         </tr>
                     </thead>
+                    <tbody>
+                    <?php 
+                        $i = 1;
+                        while($row = $result->fetch_assoc()){
+                        echo "<tr>";
+                        echo "<td>".$i."</td>";
+                        echo "<td>".$row['chk_code']."</td>";
+                        echo "<td>".$row['wifi_id']."</td>";
+                        echo "<td>".$row['check_date']."</td>";
+                        echo "<td>".$row['check_time']."</td>";
+                        echo "</tr>";
+                        $i++  ;    
+                    }
+                  
+                    ?>
+                    </tbody>
                 </table>
             </div>
             <div class="col"></div>
