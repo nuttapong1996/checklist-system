@@ -206,7 +206,7 @@
 
                                 <li class="list-group-item " style="background-color:#FEF9E7;">
                                     <div class="card-title"><h5>หมายเหตุ <i class="fa fa-info-circle"></i></h5></div>                                    
-                                    <textarea class="form-control form-control-sm" id="remark" name="remark" rows="3" required></textarea>       
+                                    <textarea class="form-control form-control-sm" id="remark" name="remark" rows="3"></textarea>       
                                 </li>
                             </ul>
                         </div>
