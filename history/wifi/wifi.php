@@ -47,22 +47,34 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-3">
             <div class="col"></div>
             <div class="col-sm-12">
-                <table class="table table-sm" id="myTable">
+                <div class="table-responsive-sm">
+                <table class="table table-sm table-bordered" id="myTable">
+                    <caption class="caption-top"><?php echo "Date : ". date('d-m-Y'); ?></caption>
                     <?php
                     $mysqli = dbConnect();
-                    $strsql = "SELECT * FROM tbl_checklist_wifi WHERE substring(check_date,5,2) = month(NOW()) AND substring(check_date,7,4) = YEAR(NOW());";
-                    $result = $mysqli->query($strsql);
+                    $strsql = " SELECT tbl_checklist_wifi.chk_code,tbl_list_wifi.wifi_name,tbl_checklist_wifi.check_date,tbl_checklist_wifi.check_time, 
+                                tbl_user.fname,
+                                tbl_equipment_status.eqs_name
+                                FROM
+                                tbl_checklist_wifi
+                                INNER JOIN tbl_list_wifi ON tbl_checklist_wifi.wifi_id = tbl_list_wifi.wifi_id
+                                INNER JOIN tbl_user ON tbl_checklist_wifi.user_id =tbl_user.user_id 
+                                INNER JOIN tbl_equipment_status ON tbl_checklist_wifi.rp_status = tbl_equipment_status.eqs_id
+                                WHERE substring(check_date,5,2) = month(NOW()) AND substring(check_date,7,4) = YEAR(NOW());";
+                    $result = $mysqli->query($strsql) or die($mysqli->error);
                     ?>
-                    <thead>
+                    <thead class="table-dark" style="text-align:center;">
                         <tr>
                             <th>#</th>
                             <th>เลขที่</th>
                             <th>Wifi</th>
                             <th>วันที่ตรวจเช็ค</th>
                             <th>เวลาที่ตรวจเช็ค</th>
+                            <th>ผู้ตรวจเช็ค</th>
+                            <th>สถานะ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,11 +82,24 @@
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
+
                             echo "<td>" . $i . "</td>";
                             echo "<td>" . $row['chk_code'] . "</td>";
-                            echo "<td>" . $row['wifi_id'] . "</td>";
+                            echo "<td>" . $row['wifi_name'] . "</td>";
                             echo "<td>" . $row['check_date'] . "</td>";
                             echo "<td>" . $row['check_time'] . "</td>";
+                            echo "<td>" . $row['fname'] . "</td>";
+                            echo "<td>" ;
+
+                            if($row['eqs_name']=="ปกติ"){
+                                echo "<a class = 'btn btn-primary' href='history/wifi/detail.php?chk=".$row['chk_code']."'>".$row['eqs_name']."</a>";
+                            }else if($row['eqs_name']=="แจ้งซ่อม"){
+                                echo "<a class = 'btn btn-danger'>".$row['eqs_name']."</a>";
+                            }else if($row['eqs_name']=="รอดำเนินการ"){
+                                echo "<a class = 'btn btn-warning'>".$row['eqs_name']."</a>";
+                            }
+
+                            echo "</td>";
                             echo "</tr>";
                             $i++;
                         }
@@ -82,6 +107,7 @@
                         ?>
                     </tbody>
                 </table>
+                </div>
             </div>
             <div class="col"></div>
         </div>
