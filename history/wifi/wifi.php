@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
 
-use function PHPSTORM_META\type;
-
     include('include/DbConnect.php');
     ?>
     <title>ประวัติ Checklist</title>
@@ -18,7 +16,7 @@ use function PHPSTORM_META\type;
     <div class="container-fluid">
         <div class="row mt-5">
             <div class="col-sm-5">
-                <form action=""method="POST">
+                <form action=""method="post">
                 <div class="input-group">
                     <?php
                         $selected_month = date('m'); //current month
@@ -73,18 +71,21 @@ use function PHPSTORM_META\type;
                     $result = $mysqli->query($strsql) or die($mysqli->error);
                     
                 //SQL select month and year
-                     $month = $_POST['month'];
-                    $year = $_POST['year'];
-                    $sqlMonthYear = "SELECT tbl_checklist_wifi.chk_code,tbl_list_wifi.wifi_name,tbl_checklist_wifi.check_date,tbl_checklist_wifi.check_time, 
-                                    tbl_user.fname,
-                                    tbl_equipment_status.eqs_name
-                                    FROM
-                                    tbl_checklist_wifi
-                                    INNER JOIN tbl_list_wifi ON tbl_checklist_wifi.wifi_id = tbl_list_wifi.wifi_id
-                                    INNER JOIN tbl_user ON tbl_checklist_wifi.user_id =tbl_user.user_id 
-                                    INNER JOIN tbl_equipment_status ON tbl_checklist_wifi.rp_status = tbl_equipment_status.eqs_id
-                                    WHERE substring(check_date,5,1) = month($month) AND substring(check_date,7,4) = YEAR($year);";
-                    $MonthYearResult = $mysqli->query($sqlMonthYear) or die($mysqli->error); 
+                if(isset($_POST['month']) && isset($_POST['year'])){  
+                $month = $_POST['month'];
+                $year = $_POST['year'];
+                $sqlMonthYear = "SELECT tbl_checklist_wifi.chk_code,tbl_list_wifi.wifi_name,tbl_checklist_wifi.check_date,tbl_checklist_wifi.check_time, 
+                                tbl_user.fname,
+                                tbl_equipment_status.eqs_name
+                                FROM
+                                tbl_checklist_wifi
+                                INNER JOIN tbl_list_wifi ON tbl_checklist_wifi.wifi_id = tbl_list_wifi.wifi_id
+                                INNER JOIN tbl_user ON tbl_checklist_wifi.user_id =tbl_user.user_id 
+                                INNER JOIN tbl_equipment_status ON tbl_checklist_wifi.rp_status = tbl_equipment_status.eqs_id
+                                WHERE substring(check_date,5,1) = month($month) AND substring(check_date,7,4) = YEAR($year);";
+                $MonthYearResult = $mysqli->query($sqlMonthYear) or die($mysqli->error); 
+                }
+
                     ?>
                     <thead class="table-dark" style="text-align:center;">
                         <tr>
@@ -98,11 +99,33 @@ use function PHPSTORM_META\type;
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        
-                        if(isset($_POST['month']) && isset($_POST['year'])){
-                                
-                        }
+                        <?php                        
+                        if(isset($_POST['month']) && isset($_POST['year'])){                          
+                            $i = 1;
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+    
+                                echo "<td>" . $i . "</td>";
+                                echo "<td>" . $row['chk_code'] . "</td>";
+                                echo "<td>" . $row['wifi_name'] . "</td>";
+                                echo "<td>" . $row['check_date'] . "</td>";
+                                echo "<td>" . $row['check_time'] . "</td>";
+                                echo "<td>" . $row['fname'] . "</td>";
+                                echo "<td>" ;
+    
+                                if($row['eqs_name']=="ปกติ"){
+                                    echo "<a class = 'btn btn-primary' href='history/wifi/detail.php?chk=".$row['chk_code']."'>".$row['eqs_name']."</a>";
+                                }else if($row['eqs_name']=="แจ้งซ่อม"){
+                                    echo "<a class = 'btn btn-danger'>".$row['eqs_name']."</a>";
+                                }else if($row['eqs_name']=="รอดำเนินการ"){
+                                    echo "<a class = 'btn btn-warning'>".$row['eqs_name']."</a>";
+                                }
+    
+                                echo "</td>";
+                                echo "</tr>";
+                                $i++;
+                            } 
+                        }else{                      
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
@@ -127,7 +150,7 @@ use function PHPSTORM_META\type;
                             echo "</tr>";
                             $i++;
                         }
-
+                        }
                         //Selected month and year
 
                         ?>
