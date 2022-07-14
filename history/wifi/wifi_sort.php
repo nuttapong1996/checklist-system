@@ -6,10 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-
-use function PHPSTORM_META\type;
-
     include('include/DbConnect.php');
+
     ?>
     <title>ประวัติ Checklist</title>
 </head>
@@ -18,10 +16,10 @@ use function PHPSTORM_META\type;
     <div class="container-fluid">
         <div class="row mt-5">
             <div class="col-sm-5">
-                <form action=""method="POST">
+                <form action="?page=history_wifi_sort" method="post">
                 <div class="input-group">
                     <?php
-                        $selected_month = date('m'); //current month
+                       $selected_month = date('m'); //current month
                         // replace and add new months list
                         $months_name = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
 
@@ -48,7 +46,7 @@ use function PHPSTORM_META\type;
                     }
                     echo "</select>";
                     ?>
-                    <input type="submit" class="btn btn-primary" id="Dsubmit" name="Dsubmit" value="Ok">
+                    <input type="submit" class="btn btn-primary" value="Ok">
                 </div>
                 </form>
             </div>
@@ -61,6 +59,8 @@ use function PHPSTORM_META\type;
                     <caption class="caption-top"><?php echo "Date : ". date('d-m-Y'); ?></caption>
                     <?php
                     $mysqli = dbConnect();
+                    $m = $_POST['month'];
+                    $y = $_POST['year'];
                     $strsql = " SELECT tbl_checklist_wifi.chk_code,tbl_list_wifi.wifi_name,tbl_checklist_wifi.check_date,tbl_checklist_wifi.check_time, 
                                 tbl_user.fname,
                                 tbl_equipment_status.eqs_name
@@ -69,22 +69,8 @@ use function PHPSTORM_META\type;
                                 INNER JOIN tbl_list_wifi ON tbl_checklist_wifi.wifi_id = tbl_list_wifi.wifi_id
                                 INNER JOIN tbl_user ON tbl_checklist_wifi.user_id =tbl_user.user_id 
                                 INNER JOIN tbl_equipment_status ON tbl_checklist_wifi.rp_status = tbl_equipment_status.eqs_id
-                                WHERE substring(check_date,5,1) = month(NOW()) AND substring(check_date,7,4) = YEAR(NOW());";
+                                WHERE substring(check_date,5,1) = month($m) AND substring(check_date,7,4) = YEAR($y);";
                     $result = $mysqli->query($strsql) or die($mysqli->error);
-                    
-                //SQL select month and year
-                     $month = $_POST['month'];
-                    $year = $_POST['year'];
-                    $sqlMonthYear = "SELECT tbl_checklist_wifi.chk_code,tbl_list_wifi.wifi_name,tbl_checklist_wifi.check_date,tbl_checklist_wifi.check_time, 
-                                    tbl_user.fname,
-                                    tbl_equipment_status.eqs_name
-                                    FROM
-                                    tbl_checklist_wifi
-                                    INNER JOIN tbl_list_wifi ON tbl_checklist_wifi.wifi_id = tbl_list_wifi.wifi_id
-                                    INNER JOIN tbl_user ON tbl_checklist_wifi.user_id =tbl_user.user_id 
-                                    INNER JOIN tbl_equipment_status ON tbl_checklist_wifi.rp_status = tbl_equipment_status.eqs_id
-                                    WHERE substring(check_date,5,1) = month($month) AND substring(check_date,7,4) = YEAR($year);";
-                    $MonthYearResult = $mysqli->query($sqlMonthYear) or die($mysqli->error); 
                     ?>
                     <thead class="table-dark" style="text-align:center;">
                         <tr>
@@ -99,10 +85,6 @@ use function PHPSTORM_META\type;
                     </thead>
                     <tbody>
                         <?php
-                        
-                        if(isset($_POST['month']) && isset($_POST['year'])){
-                                
-                        }
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
@@ -128,8 +110,6 @@ use function PHPSTORM_META\type;
                             $i++;
                         }
 
-                        //Selected month and year
-
                         ?>
                     </tbody>
                 </table>
@@ -149,14 +129,5 @@ use function PHPSTORM_META\type;
 
     $('#myTable').DataTable({
         responsive: true
-    });
-</script>
-
-<script>
-    $('#Dsubmit').click(function() {
-        var month = $('#month').val();
-        var year = $('#year').val();
-        var url = "history/wifi/wifi.php?month=" + month + "&year=" + year;
-        window.location.href = url;
     });
 </script>
