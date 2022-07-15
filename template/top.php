@@ -36,7 +36,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ประวัติ Checklist</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="?page=history_wifi"><i class="fa fa-wifi"></i> Wifi</a></li>
+                        <li><a class="dropdown-item" href="?page=report_wifi"><i class="fa fa-wifi"></i> Wifi</a></li>
                         <li><a class="dropdown-item" href="#">Printer RICOH</a></li>
                         <li><a class="dropdown-item" href="#">Printer Sticker</a></li>
                         <li><a class="dropdown-item" href="#">CCTV</a></li>

@@ -18,15 +18,22 @@
             <div class="col-sm-5">
                 <form action=""method="post">
                 <div class="input-group">
+                    <div class="input-group-prepend"><label for="month" class="input-group-text">เดือน</label></div>
                     <?php
                         $selected_month = date('m'); //current month
                         // replace and add new months list
                         $months_name = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
 
-                        echo 'เดือน &nbsp; <select class="form-control form-control-sm" id="month" name="month">'."\n";
+                        echo '<select class="form-control form-control-sm" id="month" name="month">'."\n";
                         for ($i_month = 1; $i_month <= 12; $i_month++) { 
-                            $selected = ($selected_month == $i_month ? ' selected' : '');
+                           
+                            if(isset($_POST['month'])){
+                                $selected = ($_POST['month'] == $i_month ? ' selected' : '');
+                            }else{
+                                $selected = ($selected_month == $i_month ? ' selected' : '');
+                            }
                             echo '<option value="'.$i_month.'"'.$selected.'>'. $months_name[$i_month-1].'</option>'."\n";
+                            
                         }
                             echo '</select>&nbsp;';
                     ?>
@@ -34,16 +41,14 @@
                     $current_year = date("Y");
                     $earliest_year = 2021;
                     $last_year = date("Y");
-
-                    echo "ปี &nbsp;<select class='form-control form-control-sm' name='year' id='year'>";
-                    echo "<option value=''>ปี</option>";
-                    foreach (range($last_year, $earliest_year) as $r) {
-                        echo "<option value='$r'";
-                        if ($r == $current_year) {
-                            echo "selected";
-                        }
+                    echo "<div class='input-group-prepend'><label for='year' class='input-group-text'>ปี</label></div>";
+                    echo "<select class='form-control form-control-sm' name='year' id='year'>";
+                        echo "<option value=''>ปี</option>";
+                        foreach (range($last_year, $earliest_year) as $r) {
+                        echo "<option value='$r'";if ($r == $current_year) {echo "selected";} 
+                        if(isset($_POST['year'])){ echo"value='$r'"; if($r == $_POST['year']){echo"selected";}}
                         echo ">$r</option>";
-                    }
+                        }
                     echo "</select>";
                     ?>
                     <input type="submit" class="btn btn-primary" id="Dsubmit" name="Dsubmit" value="Ok">
@@ -56,7 +61,7 @@
             <div class="col-sm-12">
                 <div class="table-responsive-sm">
                 <table class="table table-sm table-bordered" id="myTable">
-                    <caption class="caption-top"><?php echo "Date : ". date('d-m-Y'); ?></caption>
+                <caption class="caption-top"><?php echo "Curent Date : ". date('d-m-Y');  ?></caption>
                     <?php
                     $mysqli = dbConnect();
                     $strsql = " SELECT tbl_checklist_wifi.chk_code,tbl_list_wifi.wifi_name,tbl_checklist_wifi.check_date,tbl_checklist_wifi.check_time, 
@@ -82,10 +87,9 @@
                                 INNER JOIN tbl_list_wifi ON tbl_checklist_wifi.wifi_id = tbl_list_wifi.wifi_id
                                 INNER JOIN tbl_user ON tbl_checklist_wifi.user_id =tbl_user.user_id 
                                 INNER JOIN tbl_equipment_status ON tbl_checklist_wifi.rp_status = tbl_equipment_status.eqs_id
-                                WHERE substring(check_date,5,1) = month($month) AND substring(check_date,7,4) = YEAR($year);";
+                                WHERE substring(check_date,5,1) = $month AND substring(check_date,7,4) = $year;";
                 $MonthYearResult = $mysqli->query($sqlMonthYear) or die($mysqli->error); 
                 }
-
                     ?>
                     <thead class="table-dark" style="text-align:center;">
                         <tr>
@@ -99,12 +103,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php                        
-                        if(isset($_POST['month']) && isset($_POST['year'])){                          
+                        <?php 
+                        //หากเลือกเดือนและปีที่กดปุ่ม OK ให้ใช้เงื่อนไขนี้                       
+                        if(isset($_POST['month']) && isset($_POST['year'])){      
                             $i = 1;
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-    
+                            while ( $row = $MonthYearResult->fetch_assoc() ) {
+                                echo "<tr style='text-align:center'>";    
                                 echo "<td>" . $i . "</td>";
                                 echo "<td>" . $row['chk_code'] . "</td>";
                                 echo "<td>" . $row['wifi_name'] . "</td>";
@@ -114,7 +118,7 @@
                                 echo "<td>" ;
     
                                 if($row['eqs_name']=="ปกติ"){
-                                    echo "<a class = 'btn btn-primary' href='history/wifi/detail.php?chk=".$row['chk_code']."'>".$row['eqs_name']."</a>";
+                                    echo "<a class = 'btn btn-success' href='history/wifi/detail.php?chk=".$row['chk_code']."'>".$row['eqs_name']."</a>";
                                 }else if($row['eqs_name']=="แจ้งซ่อม"){
                                     echo "<a class = 'btn btn-danger'>".$row['eqs_name']."</a>";
                                 }else if($row['eqs_name']=="รอดำเนินการ"){
@@ -125,7 +129,8 @@
                                 echo "</tr>";
                                 $i++;
                             } 
-                        }else{                      
+                        }else{  
+                        //หน้าหลักที่แสดง                    
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
@@ -179,7 +184,7 @@
     $('#Dsubmit').click(function() {
         var month = $('#month').val();
         var year = $('#year').val();
-        var url = "history/wifi/wifi.php?month=" + month + "&year=" + year;
+        var url = "report/wifi/wifi.php?month=" + month + "&year=" + year;
         window.location.href = url;
     });
 </script>

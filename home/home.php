@@ -30,8 +30,7 @@
         elseif($page=="cctv"){include 'form/cctv/cctv.php';}
         elseif($page=="wallrack"){include 'form/wallrack/wallrack.php';}
 
-        elseif($page=="history_wifi"){include 'history/wifi/wifi.php';}
-        elseif($page=="history_wifi_sort"){include 'history/wifi/wifi_sort.php';}
+        elseif($page=="report_wifi"){include 'report/wifi/wifi.php';}
          ?>
     </div>
     <button onclick="topFunction()" id="myBtn" title="Go to top"><i class=" fa fa-chevron-up fa-2x" aria-hidden="true"></i></button>
